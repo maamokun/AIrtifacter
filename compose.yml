@@ -9,7 +9,7 @@ services:
       - './config:/app/config'
       - './cache:/app/cache'
       - './data:/app/data'
-    command: npm run dev
+    command: sh -c "npm run build && npm start"
   generate:
     image: ghcr.io/maamokun/airtifacter
     volumes:

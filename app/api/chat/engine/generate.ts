@@ -11,29 +11,29 @@ import { STORAGE_CACHE_DIR } from "./shared";
 dotenv.config();
 
 async function getRuntime(func: any) {
-  const start = Date.now();
-  await func();
-  const end = Date.now();
-  return end - start;
+    const start = Date.now();
+    await func();
+    const end = Date.now();
+    return end - start;
 }
 
 async function generateDatasource() {
-  console.log(`Generating storage context...`);
-  // Split documents, create embeddings and store them in the storage context
-  const ms = await getRuntime(async () => {
-    const storageContext = await storageContextFromDefaults({
-      persistDir: STORAGE_CACHE_DIR,
+    console.log(`Generating storage context...`);
+    // Split documents, create embeddings and store them in the storage context
+    const ms = await getRuntime(async () => {
+        const storageContext = await storageContextFromDefaults({
+            persistDir: STORAGE_CACHE_DIR,
+        });
+        const documents = await getDocuments();
+        await VectorStoreIndex.fromDocuments(documents, {
+            storageContext,
+        });
     });
-    const documents = await getDocuments();
-    await VectorStoreIndex.fromDocuments(documents, {
-      storageContext,
-    });
-  });
-  console.log(`Storage context successfully generated in ${ms / 1000}s.`);
+    console.log(`Storage context successfully generated in ${ms / 1000}s.`);
 }
 
 (async () => {
-  initSettings();
-  await generateDatasource();
-  console.log("Finished generating storage.");
+    initSettings();
+    await generateDatasource();
+    console.log("Finished generating storage.");
 })();

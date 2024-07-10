@@ -6,74 +6,74 @@ export { type ChatHandler } from "./chat.interface";
 export { ChatInput, ChatMessages };
 
 export enum MessageAnnotationType {
-  CSV = "csv",
-  IMAGE = "image",
-  SOURCES = "sources",
-  EVENTS = "events",
-  TOOLS = "tools",
+    CSV = "csv",
+    IMAGE = "image",
+    SOURCES = "sources",
+    EVENTS = "events",
+    TOOLS = "tools",
 }
 
 export type ImageData = {
-  url: string;
+    url: string;
 };
 
 export type CsvFile = {
-  content: string;
-  filename: string;
-  filesize: number;
-  id: string;
+    content: string;
+    filename: string;
+    filesize: number;
+    id: string;
 };
 
 export type CsvData = {
-  csvFiles: CsvFile[];
+    csvFiles: CsvFile[];
 };
 
 export type SourceNode = {
-  id: string;
-  metadata: Record<string, unknown>;
-  score?: number;
-  text: string;
-  url?: string;
+    id: string;
+    metadata: Record<string, unknown>;
+    score?: number;
+    text: string;
+    url?: string;
 };
 
 export type SourceData = {
-  nodes: SourceNode[];
+    nodes: SourceNode[];
 };
 
 export type EventData = {
-  title: string;
-  isCollapsed: boolean;
+    title: string;
+    isCollapsed: boolean;
 };
 
 export type ToolData = {
-  toolCall: {
-    id: string;
-    name: string;
-    input: {
-      [key: string]: JSONValue;
+    toolCall: {
+        id: string;
+        name: string;
+        input: {
+            [key: string]: JSONValue;
+        };
     };
-  };
-  toolOutput: {
-    output: JSONValue;
-    isError: boolean;
-  };
+    toolOutput: {
+        output: JSONValue;
+        isError: boolean;
+    };
 };
 
 export type AnnotationData =
-  | ImageData
-  | CsvData
-  | SourceData
-  | EventData
-  | ToolData;
+    | ImageData
+    | CsvData
+    | SourceData
+    | EventData
+    | ToolData;
 
 export type MessageAnnotation = {
-  type: MessageAnnotationType;
-  data: AnnotationData;
+    type: MessageAnnotationType;
+    data: AnnotationData;
 };
 
 export function getAnnotationData<T extends AnnotationData>(
-  annotations: MessageAnnotation[],
-  type: MessageAnnotationType,
+    annotations: MessageAnnotation[],
+    type: MessageAnnotationType,
 ): T[] {
-  return annotations.filter((a) => a.type === type).map((a) => a.data as T);
+    return annotations.filter((a) => a.type === type).map((a) => a.data as T);
 }

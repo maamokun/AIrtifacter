@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - '3000:3000'
+    volumes:
+      - './.env:/app/.env'
+      - './config:/app/config'
+      - './cache:/app/cache'
+      - './data:/app/data'
+    command: npm run dev
+  generate:
+    build: .
+    volumes:
+      - './.env:/app/.env'
+      - './config:/app/config'
+      - './cache:/app/cache'
+      - './data:/app/data'
+    command: npm run generate

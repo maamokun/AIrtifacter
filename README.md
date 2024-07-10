@@ -28,6 +28,9 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 ## Using Docker
 
+- Download and use this compose file:
+```https://cdn.statically.io/gh/maamokun/AIrtifacter@master/compose.yml```
+
 1. Build an image for the Next.js app:
 
 ```

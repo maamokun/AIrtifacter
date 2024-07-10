@@ -5,6 +5,7 @@ services:
     ports:
       - '3000:3000'
     volumes:
+      - '.:/app'
       - './.env:/app/.env'
       - './config:/app/config'
       - './cache:/app/cache'
@@ -13,6 +14,7 @@ services:
   generate:
     image: ghcr.io/maamokun/airtifacter
     volumes:
+      - '.:/app'
       - './.env:/app/.env'
       - './config:/app/config'
       - './cache:/app/cache'

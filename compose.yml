@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   app:
-    build: .
+    image: ghcr.io/maamokun/airtifacter
     ports:
       - '3000:3000'
     volumes:
@@ -11,7 +11,7 @@ services:
       - './data:/app/data'
     command: npm run dev
   generate:
-    build: .
+    image: ghcr.io/maamokun/airtifacter
     volumes:
       - './.env:/app/.env'
       - './config:/app/config'

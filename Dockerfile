@@ -2,23 +2,17 @@ FROM node:20-slim AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
-
+COPY . /app
 WORKDIR /app
 
-# Copy package.json and pnpm-lock.yaml (if you have one)
-COPY package.json pnpm-lock.* ./
+FROM base AS prod-deps
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
 
-# Install dependencies
-RUN pnpm install --frozen-lockfile
-
-# Copy the rest of the application code
-COPY . .
-
-# Build the application
+FROM base AS build
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 RUN pnpm run build
 
-# ====================================
-FROM build as release
-
-# Set the command to start the application
-CMD ["pnpm", "run", "start"]
+FROM base
+COPY --from=prod-deps /app/node_modules /app/node_modules
+COPY --from=build /app/dist /app/dist
+CMD [ "pnpm", "start" ]

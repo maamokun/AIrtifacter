@@ -26,16 +26,12 @@ export default function Home() {
         </main>
     ) : (
         <main className="h-full w-full flex justify-center items-center background-gradient">
-            <div className="space-y-2 lg:space-y-10 w-[90%] lg:w-[60rem]">
-                <Header />
-                <div className="h-[65vh] flex">
-                    <div className="flex flex-col items-center justify-center">
-                        <h1 className="text-primary font-bold text-3xl">
-                            Please Login. (click the thing on the bottom right)
-                        </h1>
-                    </div>
-                </div>
+        <div className="space-y-2 lg:space-y-10 w-[90%] lg:w-[60rem]">
+            <Header />
+            <div className="h-[65vh] flex">
+                <ChatSection />
             </div>
-        </main>
+        </div>
+    </main>
     );
 }

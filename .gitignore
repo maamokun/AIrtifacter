@@ -36,3 +36,7 @@ yarn-error.log*
 next-env.d.ts
 
 tool-output/
+
+# data
+/data/
+/cache/

@@ -8,8 +8,8 @@ import "./globals.css";
 const hsr = localFont({ src: "./assets/HSR.woff2" });
 
 export const metadata: Metadata = {
-    title: "MikanDev",
-    description: "We make cool stuff to make life easier 🍊",
+    title: "AIrtifacter",
+    description: "Making building characters easier with AI!",
 };
 
 export default function RootLayout({
